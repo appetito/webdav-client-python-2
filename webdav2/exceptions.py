@@ -71,3 +71,10 @@ class NotEnoughSpace(WebDavException):
 
     def __str__(self):
         return "Not enough space on the server"
+
+class Conflict(WebDavException):
+    def __init__(self):
+        pass
+
+    def __str__(self):
+        return "Conflict"
