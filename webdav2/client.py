@@ -371,7 +371,7 @@ class Client(object):
         if buff.tell() == 0:
             data = buff.read()
         else:
-            data = buff 
+            data = buff
         response = requests.request(
             'PUT',
             options["URL"],
@@ -381,6 +381,8 @@ class Client(object):
         )
         if response.status_code == 507:
             raise NotEnoughSpace()
+        if response.status_code == 409:
+            raise Conflict()
         log.debug("Response: %s", response)
 
     def upload(self, remote_path, local_path, progress=None):
@@ -459,6 +461,8 @@ class Client(object):
             )
             if request.status_code == 507:
                 raise NotEnoughSpace()
+            if response.status_code == 409:
+                raise Conflict()
 
             # request.close()
 
